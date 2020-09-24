@@ -72,6 +72,13 @@ The Pi-KVM OS is based on Arch Linux ARM and contains all the required packages 
     [user@localhost os]$ make install
     ```
     
+or
+
+5b. Create an image to burn later for the pi - created at images/ folder
+    ```shell
+    [user@localhost os] make image
+    ```
+    
 6. After installation remove the SD card and insert it into your RPi. Turn on the power. The RPi will try to get an IP address using DHCP on your LAN. It will then be available via SSH.
 
 7. If you can't find the device's address, try using the following command:
