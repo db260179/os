@@ -60,6 +60,8 @@ The Pi-KVM OS is based on Arch Linux ARM and contains all the required packages 
     ```Makefile
     WIFI_ESSID = "my-network"
     WIFI_PASSWD = "P@$$word"
+    
+    NOTE: to escape special characters, just do "special\#\!"
     ```
 
 4. Build the OS. It may take about one hour depending on your Internet connection:
@@ -74,7 +76,7 @@ The Pi-KVM OS is based on Arch Linux ARM and contains all the required packages 
     
 or
 
-5b. Create an image to burn later for the pi - created at images/ folder
+5b. Create an image to burn later for the pi - created at images/ folder:
     ```shell
     [user@localhost os] make image
     ```
