@@ -11,6 +11,7 @@ TIMEZONE ?= Europe/London
 REPO_URL ?= http://de3.mirror.archlinuxarm.org
 BUILD_OPTS ?=
 
+WIFI_HIDE_ESSID ?=
 WIFI_ESSID ?=
 WIFI_PASSWD ?=
 WIFI_IFACE ?= wlan0
@@ -57,6 +58,7 @@ os: $(_BUILDER_DIR)
 			--build-arg USTREAMER_VERSION=$(call fetch_version,ustreamer) \
 			--build-arg KVMD_VERSION=$(call fetch_version,kvmd) \
 			--build-arg KVMD_WEBTERM_VERSION=$(call fetch_version,kvmd-webterm) \
+			--build-arg WIFI_HIDE_ESSID='$(WIFI_HIDE_ESSID)' \
 			--build-arg WIFI_ESSID='$(WIFI_ESSID)' \
 			--build-arg WIFI_PASSWD='$(WIFI_PASSWD)' \
 			--build-arg WIFI_IFACE='$(WIFI_IFACE)' \
