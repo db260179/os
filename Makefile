@@ -38,6 +38,7 @@ all:
 	@ echo "    make                # Print this help"
 	@ echo "    make os             # Build OS with your default config"
 	@ echo "    make shell          # Run Arch-ARM shell"
+	@ echo "    make image          # Build image (/images) to burn to SD card later"
 	@ echo "    make install        # Install rootfs to partitions on $(CARD)"
 	@ echo "    make scan           # Find all RPi devices in the local network"
 	@ echo "    make clean          # Remove the generated rootfs"
@@ -115,8 +116,3 @@ image:
 	'
 	bzip2 images/$(PLATFORM)-$(BOARD).img
 	sha1sum images/$(PLATFORM)-$(BOARD).img.bz2 | awk '{print $$1}' > images/$(PLATFORM)-$(BOARD).img.bz2.sha1
-
-
-upload:
-	rsync -rl --progress --delete images root@pikvm.org:/var/www/images2
-	ssh root@pikvm.org "bash -c 'mv /var/www/images2/* /var/www/images/; rmdir /var/www/images2'"
