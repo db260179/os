@@ -25,6 +25,11 @@ IPMI_ADMIN_PASSWD = admin
 # SD card device
 CARD = /dev/mmcblk0
 
+# Set WIFI SSID
 WIFI_ESSID = "my-network"
 
+# Set WIFI SSID Password
 WIFI_PASSWD = "P@$$word"
+
+# Connect to Hidden SSID - yes or no
+WIFI_HIDE_ESSID = "no"
