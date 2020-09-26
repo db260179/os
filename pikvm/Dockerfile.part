@@ -29,6 +29,7 @@ RUN sed -i -f /usr/share/kvmd/configs.default/os/cmdline/$PLATFORM-$BOARD.sed /b
 
 RUN sed -i -e "s/-session   optional   pam_systemd.so/#-session   optional   pam_systemd.so/g" /etc/pam.d/system-login
 
+ARG WIFI_HIDE_ESSID
 ARG WIFI_ESSID
 ARG WIFI_PASSWD
 ARG WIFI_IFACE
@@ -41,6 +42,7 @@ RUN [ -z "$WIFI_ESSID" ] || ( \
 		&& echo "ESSID='$WIFI_ESSID'" >> $config \
 		&& echo "IP=dhcp" >> $config \
 		&& echo "Key='$WIFI_PASSWD'" >> $config \
+		&& echo "Hidden='$WIFI_HIDE_ESSID'" >> $config \
 		&& systemctl enable netctl-auto@$WIFI_IFACE.service \
 	)
 
