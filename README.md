@@ -38,10 +38,10 @@ The Pi-KVM OS is based on Arch Linux ARM and contains all the required packages 
     HOSTNAME = pikvm
     
     # ru_RU, etc. UTF-8 only
-    LOCALE = en_US
+    LOCALE = en_GB
     
     # See /usr/share/zoneinfo
-    TIMEZONE = Europe/Moscow
+    TIMEZONE = Europe/London
     
     # For SSH root user
     ROOT_PASSWD = root
@@ -60,6 +60,7 @@ The Pi-KVM OS is based on Arch Linux ARM and contains all the required packages 
     ```Makefile
     WIFI_ESSID = "my-network"
     WIFI_PASSWD = "P@$$word"
+    WIFI_HIDE_ESSID = "no" - change if your SSID is hidden to 'yes'
     
     NOTE: to escape special characters, just do "special\#\!"
     ```
@@ -75,8 +76,9 @@ The Pi-KVM OS is based on Arch Linux ARM and contains all the required packages 
     ```
     
 or
-
+   
 5b. Create an image to burn later for the pi - created at images/ folder:
+
     ```shell
     [user@localhost os] make image
     ```
