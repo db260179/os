@@ -30,6 +30,7 @@ CARD = /dev/mmcblk0
 WIFI_ESSID = "my-network"
 
 # Set WIFI SSID Password
+# Add '\' in front of your password, if it has special characters!
 WIFI_PASSWD = "P@$$word"
 
 # Connect to Hidden SSID - yes or no
