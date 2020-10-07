@@ -1,5 +1,7 @@
 RUN rm -f /etc/ssh/ssh_host_* /etc/kvmd/nginx/ssl/*
 
+RUN sed -s -i 's:/C=RU/ST=Moscow/L=Moscow/O=Pi-KVM/OU=Pi-KVM/CN=localhost:/C=GB/ST=Somewhere/L=London/O=Pi-KVM/OU=Pi-KVM/CN=localhost:' /usr/bin/kvmd-gencert
+
 COPY stages/pikvm-image/_pikvm-firstboot.sh /usr/local/bin/_pikvm-firstboot.sh
 COPY stages/pikvm-image/pikvm-firstboot.service /etc/systemd/system/pikvm-firstboot.service
 RUN systemctl enable pikvm-firstboot
