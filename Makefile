@@ -48,6 +48,7 @@ all:
 	@ echo "    make shell          # Run Arch-ARM shell"
 	@ echo "    make image          # Build image (/images) to burn to SD card later"
 	@ echo "    make install        # Install rootfs to partitions on $(CARD)"
+	@ echo "    make image          # Create a binary image for burning outside of make install
 	@ echo "    make scan           # Find all RPi devices in the local network"
 	@ echo "    make clean          # Remove the generated rootfs"
 	@ echo "    make clean-all      # Remove the generated rootfs and pi-builder toolchain"
