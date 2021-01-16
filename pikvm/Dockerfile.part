@@ -54,7 +54,7 @@ RUN echo "root:$ROOT_PASSWD" | chpasswd \
 
 ARG ROOT_SSH_AUTH_KEYS
 RUN mkdir /root/.ssh && echo "${ROOT_SSH_AUTH_KEYS}" >> /root/.ssh/authorized_keys \
-    && chmod 600 /root/.ssh/*
+    && chmod 600 /root/.ssh/* && sed -i s/\'//g /root/.ssh/authorized_keys
 
 ARG WEBUI_ADMIN_PASSWD
 ENV WEBUI_ADMIN_PASSWD $WEBUI_ADMIN_PASSWD
