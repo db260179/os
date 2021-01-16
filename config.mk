@@ -17,6 +17,9 @@ TIMEZONE = Europe/London
 # For SSH root user
 ROOT_PASSWD = root
 
+# SSH Authorized_keys for root
+ROOT_SSH_AUTH_KEYS = "'`cat sshkeys`'"
+
 # Web UI credentials: user=admin, password=<this>
 WEBUI_ADMIN_PASSWD = admin
 
