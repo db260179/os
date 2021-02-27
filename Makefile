@@ -65,7 +65,7 @@ os: $(_BUILDER_DIR)
 			--build-arg WIFI_PASSWD=$(WIFI_PASSWD) \
 			--build-arg WIFI_IFACE=$(WIFI_IFACE) \
 			--build-arg ROOT_PASSWD=$(ROOT_PASSWD) \
-			--build-arg ROOT_SSH_AUTH_KEYS="${ROOT_SSH_AUTH_KEYS}" \
+			--build-arg ROOT_SSH_AUTH_KEYS="'$(ROOT_SSH_AUTH_KEYS)'" \
 			--build-arg WEBUI_ADMIN_PASSWD=$(WEBUI_ADMIN_PASSWD) \
 			--build-arg IPMI_ADMIN_PASSWD=$(IPMI_ADMIN_PASSWD) \
 			--build-arg NEW_HTTPS_CERT=$(shell uuidgen) \
