@@ -55,21 +55,21 @@ os: $(_BUILDER_DIR)
 	cp -a pikvm pikvm-image pikvm-otg-console $(_BUILDER_DIR)/stages
 	make -C $(_BUILDER_DIR) os \
 		NC=$(NC) \
-		BUILD_OPTS=" $(BUILD_OPTS) \
+		BUILD_OPTS=' $(BUILD_OPTS) \
 			--build-arg PLATFORM=$(PLATFORM) \
 			--build-arg USTREAMER_VERSION=$(call fetch_version,ustreamer) \
 			--build-arg KVMD_VERSION=$(call fetch_version,kvmd) \
 			--build-arg KVMD_WEBTERM_VERSION=$(call fetch_version,kvmd-webterm) \
-			--build-arg WIFI_HIDE_ESSID='$(WIFI_HIDE_ESSID)' \
-			--build-arg WIFI_ESSID='$(WIFI_ESSID)' \
-			--build-arg WIFI_PASSWD='$(WIFI_PASSWD)' \
-			--build-arg WIFI_IFACE='$(WIFI_IFACE)' \
-			--build-arg ROOT_PASSWD='$(ROOT_PASSWD)' \
+			--build-arg WIFI_HIDE_ESSID=$(WIFI_HIDE_ESSID) \
+			--build-arg WIFI_ESSID=$(WIFI_ESSID) \
+			--build-arg WIFI_PASSWD=$(WIFI_PASSWD) \
+			--build-arg WIFI_IFACE=$(WIFI_IFACE) \
+			--build-arg ROOT_PASSWD=$(ROOT_PASSWD) \
 			--build-arg ROOT_SSH_AUTH_KEYS="${ROOT_SSH_AUTH_KEYS}" \
-			--build-arg WEBUI_ADMIN_PASSWD='$(WEBUI_ADMIN_PASSWD)' \
-			--build-arg IPMI_ADMIN_PASSWD='$(IPMI_ADMIN_PASSWD)' \
+			--build-arg WEBUI_ADMIN_PASSWD=$(WEBUI_ADMIN_PASSWD) \
+			--build-arg IPMI_ADMIN_PASSWD=$(IPMI_ADMIN_PASSWD) \
 			--build-arg NEW_HTTPS_CERT=$(shell uuidgen) \
-		" \
+		' \
 		PROJECT=pikvm-os-$(PLATFORM) \
 		BOARD=$(BOARD) \
 		STAGES='$(STAGES)' \
@@ -107,14 +107,17 @@ clean-all:
 	- make -C $(_BUILDER_DIR) clean-all
 	rm -rf $(_BUILDER_DIR)
 
-
+_IMAGE_DATED := $(PLATFORM)-$(BOARD)-$(shell date +%Y%m%d).img
+_IMAGE_LATEST := $(PLATFORM)-$(BOARD)-latest.img
 image:
 	mkdir -p images
 	sudo bash -x -c ' \
-		dd if=/dev/zero of=images/$(PLATFORM)-$(BOARD).img bs=512 count=12582912 \
-		&& device=`losetup --find --show images/$(PLATFORM)-$(BOARD).img` \
+		dd if=/dev/zero of=images/$(_IMAGE_DATED).img bs=512 count=12582912 \
+		&& device=`losetup --find --show images/$(_IMAGE_DATED)` \
 		&& make install CARD=$$device \
 		&& losetup -d $$device \
 	'
-	bzip2 images/$(PLATFORM)-$(BOARD).img
-	sha1sum images/$(PLATFORM)-$(BOARD).img.bz2 | awk '{print $$1}' > images/$(PLATFORM)-$(BOARD).img.bz2.sha1
+	bzip2 -f images/$(_IMAGE_DATED)
+	sha1sum images/$(_IMAGE_DATED).bz2 | awk '{print $$1}' > images/$(_IMAGE_DATED).bz2.sha1
+	cd images && ln -sf $(_IMAGE_DATED).bz2 $(_IMAGE_LATEST).bz2
+	cd images && ln -sf $(_IMAGE_DATED).bz2.sha1 $(_IMAGE_LATEST).bz2.sha1
