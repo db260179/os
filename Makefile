@@ -118,6 +118,7 @@ image:
 		&& losetup -d $$device \
 	'
 	
-	sha1sum images/$(_IMAGE_DATED) | awk '{print $$1}' > images/$(_IMAGE_DATED).sha1
-	cd images && ln -sf $(_IMAGE_DATED) $(_IMAGE_LATEST)
-	cd images && ln -sf $(_IMAGE_DATED).sha1 $(_IMAGE_LATEST).sha1
+	gzip images/$(_IMAGE_DATED)
+	sha1sum images/$(_IMAGE_DATED).gz | awk '{print $$1}' > images/$(_IMAGE_DATED).gz.sha1
+	cd images && ln -sf $(_IMAGE_DATED).gz $(_IMAGE_LATEST).gz
+	cd images && ln -sf $(_IMAGE_DATED).gz.sha1 $(_IMAGE_LATEST).gz.sha1
