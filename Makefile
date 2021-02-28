@@ -107,8 +107,8 @@ clean-all:
 	- make -C $(_BUILDER_DIR) clean-all
 	rm -rf $(_BUILDER_DIR)
 
-_IMAGE_DATED := $(PLATFORM)-$(BOARD)-$(shell date +%Y%m%d).img
-_IMAGE_LATEST := $(PLATFORM)-$(BOARD)-latest.img
+_IMAGE_DATED := $(PLATFORM)-$(BOARD)-$(HOSTNAME)-$(shell date +%Y%m%d).img
+_IMAGE_LATEST := $(PLATFORM)-$(BOARD)-$(HOSTNAME)-latest.img
 image:
 	mkdir -p images
 	sudo bash -x -c ' \
@@ -117,7 +117,7 @@ image:
 		&& make install CARD=$$device \
 		&& losetup -d $$device \
 	'
-	bzip2 -f images/$(_IMAGE_DATED)
-	sha1sum images/$(_IMAGE_DATED).bz2 | awk '{print $$1}' > images/$(_IMAGE_DATED).bz2.sha1
-	cd images && ln -sf $(_IMAGE_DATED).bz2 $(_IMAGE_LATEST).bz2
-	cd images && ln -sf $(_IMAGE_DATED).bz2.sha1 $(_IMAGE_LATEST).bz2.sha1
+	
+	sha1sum images/$(_IMAGE_DATED) | awk '{print $$1}' > images/$(_IMAGE_DATED).sha1
+	cd images && ln -sf $(_IMAGE_DATED) $(_IMAGE_LATEST)
+	cd images && ln -sf $(_IMAGE_DATED).sha1 $(_IMAGE_LATEST).sha1
