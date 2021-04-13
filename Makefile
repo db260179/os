@@ -1,5 +1,6 @@
 -include config.mk
 
+ARCH ?= arm
 BOARD ?= rpi4
 PLATFORM ?= v2-hdmi
 STAGES ?= __init__ os pikvm-repo watchdog ro no-audit pikvm pikvm-image __cleanup__
@@ -71,6 +72,7 @@ os: $(_BUILDER_DIR)
 			--build-arg NEW_HTTPS_CERT=$(shell uuidgen) \
 		' \
 		PROJECT=pikvm-os-$(PLATFORM) \
+		ARCH=$(ARCH) \
 		BOARD=$(BOARD) \
 		STAGES='$(STAGES)' \
 		HOSTNAME=$(HOSTNAME) \
@@ -117,7 +119,7 @@ image:
 		&& make install CARD=$$device \
 		&& losetup -d $$device \
 	'
-	
+
 	gzip images/$(_IMAGE_DATED)
 	sha1sum images/$(_IMAGE_DATED).gz | awk '{print $$1}' > images/$(_IMAGE_DATED).gz.sha1
 	cd images && ln -sf $(_IMAGE_DATED).gz $(_IMAGE_LATEST).gz

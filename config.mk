@@ -1,5 +1,8 @@
 # CHANGE this template config.mk to what pi you have and your settings!
 # rpi3 for Raspberry Pi 3; rpi2 for the version 2, zerow for ZeroW
+
+ARCH = arm
+
 BOARD = zerow
 
 # Hardware configuration
