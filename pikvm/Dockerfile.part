@@ -20,12 +20,15 @@ RUN pacman --noconfirm -Syu \
 	&& (mv /boot/cmdline.txt.pacsave /boot/cmdline.txt || true) \
 	&& rm -rf /var/cache/pacman/pkg/* /boot/*.pacnew
 
+RUN pacman --noconfirm -Syu && pacman --noconfirm -Rdd python
+
 RUN pkg-install \
 	kvmd-platform-$PLATFORM-$BOARD \
 	kvmd-webterm \
 	kvmd-oled \
 	kvmd-fan \
 	wiringpi \
+	python-pikvm \
 	pastebinit \
 	tmate \
 	netctl \
