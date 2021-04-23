@@ -54,7 +54,8 @@ ARG MONITEMAILFROM
 ARG MONITEMAIL
 
 RUN sed -s -i -e "s:MONITMAILSERVER:$MONITMAILSERVER:" -e "s:MONITMAILPORT:$MONITMAILPORT:" \
-	-e "s:MONITEMAILFROM:$MONITEMAILFROM:" -e "s:MONITEMAIL:$MONITEMAIL:" /etc/monitrc
+	-e "s:MONITEMAILFROM:$MONITEMAILFROM:" -e "s:MONITEMAIL:$MONITEMAIL:" /etc/monitrc \
+	&& systemctl enable monit
 
 RUN sed -i -f /usr/share/kvmd/configs.default/os/cmdline/$PLATFORM-$BOARD.sed /boot/cmdline.txt \
 	&& cp /usr/share/kvmd/configs.default/os/boot-config/$PLATFORM-$BOARD.txt /boot/config.txt
