@@ -6,6 +6,7 @@ PLATFORM ?= v2-hdmi
 STAGES ?= __init__ os pikvm-repo watchdog ro no-audit pikvm pikvm-image __cleanup__
 
 HOSTNAME ?= pikvm
+SSLHOST ?=
 LOCALE ?= en_GB
 TIMEZONE ?= Europe/London
 #REPO_URL ?= http://mirror.yandex.ru/archlinux-arm
@@ -70,6 +71,7 @@ os: $(_BUILDER_DIR)
 			--build-arg WEBUI_ADMIN_PASSWD=$(WEBUI_ADMIN_PASSWD) \
 			--build-arg IPMI_ADMIN_PASSWD=$(IPMI_ADMIN_PASSWD) \
 			--build-arg NEW_HTTPS_CERT=$(shell uuidgen) \
+			--build-arg SSLHOST=$(SSLHOST) \
 		' \
 		PROJECT=pikvm-os-$(PLATFORM) \
 		ARCH=$(ARCH) \

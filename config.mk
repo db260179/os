@@ -11,6 +11,9 @@ PLATFORM = v2-hdmi
 # Target hostname
 HOSTNAME = pikvm
 
+# SSL cert dns name
+SSLHOST = pikvm.smart
+
 # ru_RU, etc. UTF-8 only
 LOCALE = en_GB
 
