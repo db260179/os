@@ -23,6 +23,11 @@ ROOT_SSH_AUTH_KEYS ?=
 WEBUI_ADMIN_PASSWD ?= admin
 IPMI_ADMIN_PASSWD ?= admin
 
+MONITEMAIL ?=
+MONITEMAILFROM ?=
+MONITMAILSERVER ?=
+MONITMAILPORT ?=
+
 CARD ?= /dev/mmcblk0
 
 
@@ -72,6 +77,10 @@ os: $(_BUILDER_DIR)
 			--build-arg IPMI_ADMIN_PASSWD=$(IPMI_ADMIN_PASSWD) \
 			--build-arg NEW_HTTPS_CERT=$(shell uuidgen) \
 			--build-arg SSLHOST=$(SSLHOST) \
+			--build-arg MONITEMAIL=$(MONITEMAIL) \
+			--build-arg MONITEMAILFROM=$(MONITEMAILFROM) \
+			--build-arg MONITMAILSERVER=$(MONITMAILSERVER) \
+			--build-arg MONITMAILPORT=$(MONITMAILPORT) \
 		' \
 		PROJECT=pikvm-os-$(PLATFORM) \
 		ARCH=$(ARCH) \

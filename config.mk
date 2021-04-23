@@ -1,6 +1,7 @@
 # CHANGE this template config.mk to what pi you have and your settings!
 # rpi3 for Raspberry Pi 3; rpi2 for the version 2, zerow for ZeroW
 
+# Default architecture
 ARCH = arm
 
 BOARD = zerow
@@ -14,7 +15,13 @@ HOSTNAME = pikvm
 # SSL cert dns name
 SSLHOST = pikvm.smart
 
-# ru_RU, etc. UTF-8 only
+# Monit settings
+MONITEMAIL = myemail@gmail.com
+MONITEMAILFROM = fromemail@gmail.com
+MONITMAILSERVER = smtp.gmail.com
+MONITMAILPORT = 587
+
+# en_GB, etc. UTF-8 only
 LOCALE = en_GB
 
 # See /usr/share/zoneinfo

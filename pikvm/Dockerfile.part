@@ -29,6 +29,7 @@ RUN pkg-install \
 	pastebinit \
 	tmate \
 	netctl \
+	monit \
 	parted \
 	e2fsprogs \
 	dos2unix
@@ -45,6 +46,15 @@ RUN systemctl enable kvmd \
 
 COPY stages/pikvm/motd /etc/
 COPY stages/pikvm/issue /etc/
+COPY stages/pikvm/monitrc /etc/
+
+ARG MONITMAILSERVER
+ARG MONITMAILPORT
+ARG MONITEMAILFROM
+ARG MONITEMAIL
+
+RUN sed -s -i -e "s:MONITMAILSERVER:$MONITMAILSERVER:" -e "s:MONITMAILPORT:$MONITMAILPORT:" \
+	-e "s:MONITEMAILFROM:$MONITEMAILFROM:" -e "s:MONITEMAIL:$MONITEMAIL:" /etc/monitrc
 
 RUN sed -i -f /usr/share/kvmd/configs.default/os/cmdline/$PLATFORM-$BOARD.sed /boot/cmdline.txt \
 	&& cp /usr/share/kvmd/configs.default/os/boot-config/$PLATFORM-$BOARD.txt /boot/config.txt
