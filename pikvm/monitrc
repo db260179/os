@@ -184,7 +184,6 @@ check system $HOST
 
 check filesystem root with path /
   if space usage > 80% then alert
-  if inode usage > 30000 then alert
   if inode usage > 99% then stop
 
 check network netif-wlan0 with interface wlan0
