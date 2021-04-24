@@ -47,6 +47,7 @@ RUN systemctl enable kvmd \
 COPY stages/pikvm/motd /etc/
 COPY stages/pikvm/issue /etc/
 COPY stages/pikvm/monitrc /etc/
+COPY stages/pikvm/70-wifi-power.rules /etc/udev/rules.d/
 
 ARG MONITMAILSERVER
 ARG MONITMAILPORT
