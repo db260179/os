@@ -187,9 +187,8 @@ check filesystem root with path /
   if inode usage > 99% then stop
 
 check network netif-wlan0 with interface wlan0
-  start program = "/usr/bin/ifconfig up wlan0"
-  stop program = "/usr/bin/ifconfig down wlan0"
-  if changed link capacity then alert
+  start program = "/usr/bin/systemctl start netctl-auto@wlan0.service"
+  stop program = "/usr/bin/systemctl stop netctl-auto@wlan0.service"
   if failed link then restart
   if failed link then alert
 
