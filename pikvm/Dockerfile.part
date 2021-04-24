@@ -37,6 +37,7 @@ RUN pkg-install \
 RUN systemctl enable kvmd \
 	&& systemctl enable kvmd-nginx \
 	&& systemctl enable kvmd-webterm \
+	&& echo "tmpfs /var/lib/dhclient  tmpfs  mode=0700 0 0" >> /etc/fstab \
 	&& ([[ ! $PLATFORM =~ ^.*-hdmi$ ]] || systemctl enable kvmd-tc358743) \
 	&& ([[ ! $PLATFORM =~ ^v[01]-.*$ ]] || systemctl mask serial-getty@ttyAMA0.service) \
 	&& ([[ ! $PLATFORM =~ ^v[23]-.*$ ]] || ( \
@@ -56,7 +57,7 @@ ARG MONITEMAIL
 
 RUN sed -s -i -e "s:MONITMAILSERVER:$MONITMAILSERVER:" -e "s:MONITMAILPORT:$MONITMAILPORT:" \
 	-e "s:MONITEMAILFROM:$MONITEMAILFROM:" -e "s:MONITEMAIL:$MONITEMAIL:" /etc/monitrc \
-	&& systemctl enable monit
+	&& systemctl enable monit && chmod 700 /etc/monitrc
 
 RUN sed -i -f /usr/share/kvmd/configs.default/os/cmdline/$PLATFORM-$BOARD.sed /boot/cmdline.txt \
 	&& cp /usr/share/kvmd/configs.default/os/boot-config/$PLATFORM-$BOARD.txt /boot/config.txt
