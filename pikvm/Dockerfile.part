@@ -37,7 +37,6 @@ RUN pkg-install \
 RUN systemctl enable kvmd \
 	&& systemctl enable kvmd-nginx \
 	&& systemctl enable kvmd-webterm \
-	&& echo "tmpfs /var/lib/dhclient  tmpfs  mode=0700 0 0" >> /etc/fstab \
 	&& ([[ ! $PLATFORM =~ ^.*-hdmi$ ]] || systemctl enable kvmd-tc358743) \
 	&& ([[ ! $PLATFORM =~ ^v[01]-.*$ ]] || systemctl mask serial-getty@ttyAMA0.service) \
 	&& ([[ ! $PLATFORM =~ ^v[23]-.*$ ]] || ( \
