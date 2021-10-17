@@ -30,6 +30,8 @@ MONITMAILPORT ?=
 
 CARD ?= /dev/mmcblk0
 
+DEPLOY_USER ?= root
+
 
 # =====
 SHELL = /usr/bin/env bash
