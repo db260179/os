@@ -127,6 +127,7 @@ clean-all:
 _IMAGE_DATED := $(PLATFORM)-$(BOARD)-$(HOSTNAME)-$(shell date +%Y%m%d).img
 _IMAGE_LATEST := $(PLATFORM)-$(BOARD)-$(HOSTNAME)-latest.img
 image:
+	which xz
 	mkdir -p images
 	sudo bash -x -c ' \
 		truncate images/$(_IMAGE_DATED) -s 6G \
