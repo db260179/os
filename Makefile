@@ -35,7 +35,7 @@ DEPLOY_USER ?= root
 
 # =====
 SHELL = /usr/bin/env bash
-_BUILDER_DIR = ./.pi-builder
+_BUILDER_DIR = ./.pi-builder/$(PLATFORM)-$(BOARD)
 
 define fetch_version
 $(shell curl --silent "https://files.pikvm.org/repos/arch/$(BOARD)/latest/$(1)")
@@ -123,6 +123,7 @@ clean: $(_BUILDER_DIR)
 clean-all:
 	- $(MAKE) -C $(_BUILDER_DIR) clean-all
 	rm -rf $(_BUILDER_DIR)
+	- rmdir `dirname $(_BUILDER_DIR)`
 
 _IMAGE_DATED := $(PLATFORM)-$(BOARD)-$(HOSTNAME)-$(shell date +%Y%m%d).img
 _IMAGE_LATEST := $(PLATFORM)-$(BOARD)-$(HOSTNAME)-latest.img
