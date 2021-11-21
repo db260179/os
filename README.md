@@ -17,9 +17,9 @@ The Pi-KVM OS is based on Arch Linux ARM and contains all the required packages 
     ```
 
 2. Determine the target hardware configuration (platform):
-  * Choose the board: `BOARD=rpi4` for Raspberry Pi 4 or `BOARD=zerow`, `BOARD=rpi2`, `BOARD=rpi3` for other options.
+  * Choose the board: `BOARD=rpi4` for Raspberry Pi 4 or `BOARD=zerow`, `BOARD=zero2w`, `BOARD=rpi2`, `BOARD=rpi3` for other options.
   * Choose the platform:
-    - `PLATFORM=v2-hdmi` for RPi4 or ZeroW with HDMI-CSI bridge.
+    - `PLATFORM=v2-hdmi` for RPi4 or ZeroW/2 with HDMI-CSI bridge.
     - `PLATFORM=v0-hdmi` for RPi 2 or 3 with HDMI-CSI bridge and Arduino HID.
     - `PLATFORM=v2-hdmiusb` for RPi4 or ZeroW with HDMI-USB dongle.
     - `PLATFORM=v0-hdmiusb` for RPi 2 or 3 with HDMI-USB dongle and Arduino HID.
@@ -28,7 +28,7 @@ The Pi-KVM OS is based on Arch Linux ARM and contains all the required packages 
 3. Create the config file `config.mk` for the target system. You must specify the path to the SD card on your local computer (this will be used to format and install the system) and the version of your Raspberry Pi and platform. You can change other parameters as you wish. Please note: if your password contains the # character, you must escape it using a backslash like `ROOT_PASSWD = pass\#word`.
     ```Makefile
     [user@localhost os]$ cat config.mk
-    # rpi3 for Raspberry Pi 3; rpi2 for the version 2, zerow for ZeroW
+    # rpi3 for Raspberry Pi 3; rpi2 for the version 2, zerow for ZeroW or zero2w for ZeroW2
     BOARD = rpi4
     
     # Hardware configuration
