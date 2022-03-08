@@ -3,6 +3,7 @@
 ARCH ?= arm
 BOARD ?= rpi4
 PLATFORM ?= v2-hdmi
+SUFFIX ?=
 STAGES ?= __init__ os pikvm-repo watchdog ro no-audit pikvm __cleanup__
 
 HOSTNAME ?= pikvm
@@ -35,9 +36,13 @@ DEPLOY_USER ?= root
 
 # =====
 SHELL = /usr/bin/env bash
-_BUILDER_DIR = ./.pi-builder/$(PLATFORM)-$(BOARD)
+_BUILDER_DIR = ./.pi-builder/$(PLATFORM)-$(BOARD)$(SUFFIX)
 
-define fetch_version
+define optbool
+$(filter $(shell echo $(1) | tr A-Z a-z),yes on 1)
+endef
+
+define fv
 $(shell curl --silent "https://files.pikvm.org/repos/arch/$(BOARD)/latest/$(1)")
 endef
 
