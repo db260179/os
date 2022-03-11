@@ -93,7 +93,7 @@ os: $(_BUILDER_DIR)
 
 
 $(_BUILDER_DIR):
-	git clone --depth=1 https://github.com/db260179/pi-builder.git $(_BUILDER_DIR)
+	git clone --depth=1 https://github.com/db260179/pi-builder.git -b armv6-support $(_BUILDER_DIR)
 
 
 update: $(_BUILDER_DIR)
