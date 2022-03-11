@@ -1,7 +1,7 @@
 -include config.mk
 
 ARCH ?= arm
-BOARD ?= rpi4
+BOARD ?= zerow
 PLATFORM ?= v2-hdmi
 STAGES ?= __init__ os pikvm-repo watchdog ro no-audit pikvm pikvm-image __cleanup__
 
@@ -9,8 +9,8 @@ HOSTNAME ?= pikvm
 SSLHOST ?=
 LOCALE ?= en_GB
 TIMEZONE ?= Europe/London
-#REPO_URL ?= http://mirror.yandex.ru/archlinux-arm
-REPO_URL ?= http://de3.mirror.archlinuxarm.org
+#REPO_URL ?= http://de3.mirror.archlinuxarm.org
+REPO_URL ?= http://tardis.tiny-vps.com/aarm
 BUILD_OPTS ?=
 
 WIFI_HIDE_ESSID ?=
