@@ -1,7 +1,7 @@
 -include config.mk
 
 ARCH ?= arm
-BOARD ?= zerow
+BOARD ?= rpi
 PLATFORM ?= v2-hdmi
 STAGES ?= __init__ os pikvm-repo watchdog ro no-audit pikvm pikvm-image __cleanup__
 
@@ -64,9 +64,9 @@ os: $(_BUILDER_DIR)
 		NC=$(NC) \
 		BUILD_OPTS=' $(BUILD_OPTS) \
 			--build-arg PLATFORM=$(PLATFORM) \
-			--build-arg USTREAMER_VERSION=$(call fetch_version,ustreamer) \
-			--build-arg KVMD_VERSION=$(call fetch_version,kvmd) \
-			--build-arg KVMD_WEBTERM_VERSION=$(call fetch_version,kvmd-webterm) \
+			--build-arg USTREAMER_VERSION=4.12 \
+			--build-arg KVMD_VERSION=3.55 \
+			--build-arg KVMD_WEBTERM_VERSION=0.41 \
 			--build-arg WIFI_HIDE_ESSID=$(WIFI_HIDE_ESSID) \
 			--build-arg WIFI_ESSID=$(WIFI_ESSID) \
 			--build-arg WIFI_PASSWD=$(WIFI_PASSWD) \
