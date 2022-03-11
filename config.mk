@@ -4,7 +4,7 @@
 # Default architecture
 ARCH = arm
 
-BOARD = zerow
+BOARD = zero2w
 
 # Hardware configuration
 PLATFORM = v2-hdmi
