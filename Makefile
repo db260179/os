@@ -10,7 +10,7 @@ SSLHOST ?=
 LOCALE ?= en_GB
 TIMEZONE ?= Europe/London
 #REPO_URL ?= http://de3.mirror.archlinuxarm.org
-REPO_URL ?= http://tardis.tiny-vps.com/aarm
+REPO_URL ?= http://tardis.tiny-vps.com/aarm/repos/2022/01/08
 BUILD_OPTS ?=
 
 WIFI_HIDE_ESSID ?=
