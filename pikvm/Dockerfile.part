@@ -9,8 +9,7 @@ RUN pacman --noconfirm -Syu \
 	&& case "$ARCH" in \
 		arm) \
 			case "$BOARD" in \
-				rpi2|rpi3|zero2w) yes | pacman --needed -S pikvm-os-raspberrypi;; \
-				rpi4) yes | pacman -S pikvm-os-raspberrypi4;; \
+				rpi2|rpi3|rpi4|zero2w) yes | pacman --needed -S pikvm-os-raspberrypi;; \
 			esac;; \
 		aarch64) true;; \
 		*) echo "Unknown architecture: $ARCH"; exit 1;; \
