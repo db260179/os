@@ -36,7 +36,7 @@ SHELL = /usr/bin/env bash
 _BUILDER_DIR = ./.pi-builder
 
 define fetch_version
-$(shell curl --silent "https://pikvm.org/repos/$(BOARD)/latest/$(1)")
+$(shell curl --silent "https://files.pikvm.org/repos/arch/$(BOARD)/latest/$(1)")
 endef
 
 
