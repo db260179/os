@@ -77,8 +77,8 @@ RUN sed -s -i -e "s:MONITMAILSERVER:$MONITMAILSERVER:" -e "s:MONITMAILPORT:$MONI
 RUN sed -i -f /usr/share/kvmd/configs.default/os/cmdline/$PLATFORM-$BOARD.sed /boot/cmdline.txt \
 	&& cp /usr/share/kvmd/configs.default/os/boot-config/$PLATFORM-$BOARD.txt /boot/config.txt
 
-RUN sed -e '/\<pam_systemd\.so\>/ s/^#*/#/' /etc/pam.d/system-login \
-	&& sed -e '/\<pam_systemd_home\.so\>/ s/^#*/#/' /etc/pam.d/system-auth
+RUN sed -i -e '/\<pam_systemd\.so\>/ s/^#*/#/' /etc/pam.d/system-login \
+	&& sed -i -e '/\<pam_systemd_home\.so\>/ s/^#*/#/' /etc/pam.d/system-auth
 
 ARG WIFI_HIDE_ESSID
 ARG WIFI_ESSID
