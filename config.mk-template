@@ -1,0 +1,18 @@
+# Rename this file to config.mk
+
+# Raspberry Pi4 V3 hat box
+# Uncomment to use
+#BOARD = rpi4
+#PLATFORM = v3-hdmi
+#SUFFIX = -box
+#OLED = 1
+#FAN = 1
+
+# Raspberry Pi4 V3 standard hdmi
+# Uncomment to use
+#BOARD = rpi4
+#PLATFORM = v3-hdmi
+#SUFFIX =
+#OLED =
+#FAN =
+
