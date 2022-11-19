@@ -51,6 +51,7 @@ all:
 	@ echo "    make scan           # Find all RPi devices in the local network"
 	@ echo "    make clean          # Remove the generated rootfs"
 	@ echo "    make clean-all      # Remove the generated rootfs and pi-builder toolchain"
+	@ echo "    make update         # Update Pi-Builder git files"
 
 
 shell: $(_BUILDER_DIR)
