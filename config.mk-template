@@ -1,5 +1,8 @@
 # Rename this file to config.mk
 
+# Pikvm hostname
+HOSTNAME = pikvm
+
 # Raspberry Pi4 V3 hat box
 # Uncomment to use
 #BOARD = rpi4
