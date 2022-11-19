@@ -24,3 +24,13 @@ MONITEMAIL = myemail@gmail.com
 MONITEMAILFROM = fromemail@gmail.com
 MONITMAILSERVER = smtp.gmail.com
 MONITMAILPORT = 587
+
+# Web Admin/IPMI Admin password
+WEBUI_ADMIN_PASSWD = changeme
+IPMI_ADMIN_PASSWD = changeme
+
+# Root password
+ROOT_PASSWD = changeme
+
+# SSH Authorized_keys for root
+ROOT_SSH_AUTH_KEYS = "`cat sshkeys`"
