@@ -39,6 +39,7 @@ RUN pkg-install --assume-installed tessdata \
 	pastebinit \
 	dhclient \
 	tmate \
+	monit \
 	vi-vim-symlink \
 	nano-syntax-highlighting \
 	hostapd
@@ -68,6 +69,16 @@ RUN cp -a /etc/skel/.nanorc /root \
 
 COPY stages/pikvm/motd /etc/
 COPY stages/pikvm/issue /etc/
+COPY stages/pikvm/monitrc /etc/monitrc
+
+ARG MONITMAILSERVER
+ARG MONITMAILPORT
+ARG MONITEMAILFROM
+ARG MONITEMAIL
+
+RUN sed -s -i -e "s:MONITMAILSERVER:$MONITMAILSERVER:" -e "s:MONITMAILPORT:$MONITMAILPORT:" \
+	-e "s:MONITEMAILFROM:$MONITEMAILFROM:" -e "s:MONITEMAIL:$MONITEMAIL:" /etc/monitrc \
+	&& systemctl enable monit && chmod 700 /etc/monitrc
 
 RUN sed -i -f /usr/share/kvmd/configs.default/os/cmdline/$PLATFORM-$BOARD.sed /boot/cmdline.txt \
 	&& cp /usr/share/kvmd/configs.default/os/boot-config/$PLATFORM-$BOARD.txt /boot/config.txt
