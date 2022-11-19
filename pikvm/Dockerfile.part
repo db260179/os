@@ -78,6 +78,10 @@ RUN echo "root:$ROOT_PASSWD" | chpasswd \
 	&& echo "PermitRootLogin yes" >> /etc/ssh/sshd_config \
 	&& userdel -r -f alarm
 
+ARG ROOT_SSH_AUTH_KEYS
+RUN mkdir /root/.ssh && echo "${ROOT_SSH_AUTH_KEYS}" >> /root/.ssh/authorized_keys \
+    && chmod 600 /root/.ssh/* && sed -i s/\'//g /root/.ssh/authorized_keys
+    
 ARG WEBUI_ADMIN_PASSWD
 ENV WEBUI_ADMIN_PASSWD $WEBUI_ADMIN_PASSWD
 RUN echo "$WEBUI_ADMIN_PASSWD" | kvmd-htpasswd set --read-stdin admin

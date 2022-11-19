@@ -13,6 +13,7 @@ REPO_URL ?= http://de3.mirror.archlinuxarm.org
 BUILD_OPTS ?=
 
 ROOT_PASSWD ?= root
+ROOT_SSH_AUTH_KEYS ?=
 WEBUI_ADMIN_PASSWD ?= admin
 IPMI_ADMIN_PASSWD ?= admin
 
@@ -63,6 +64,7 @@ os: $(_BUILDER_DIR)
 			--build-arg OLED=$(call optbool,$(OLED)) \
 			--build-arg FAN=$(call optbool,$(FAN)) \
 			--build-arg ROOT_PASSWD=$(ROOT_PASSWD) \
+			--build-arg ROOT_SSH_AUTH_KEYS="'$(ROOT_SSH_AUTH_KEYS)'" \
 			--build-arg WEBUI_ADMIN_PASSWD=$(WEBUI_ADMIN_PASSWD) \
 			--build-arg IPMI_ADMIN_PASSWD=$(IPMI_ADMIN_PASSWD) \
 		' \
@@ -77,7 +79,7 @@ os: $(_BUILDER_DIR)
 
 $(_BUILDER_DIR):
 	mkdir -p `dirname $(_BUILDER_DIR)`
-	git clone --depth=1 https://github.com/mdevaev/pi-builder $(_BUILDER_DIR)
+	git clone --depth=1 https://github.com/db260179/pi-builder -b stable $(_BUILDER_DIR)
 
 
 update: $(_BUILDER_DIR)
