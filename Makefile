@@ -132,7 +132,7 @@ _IMAGE_LATEST := $(PLATFORM)-$(BOARD)-$(HOSTNAME)-latest.img
 image:
 	which xz
 	mkdir -p images
-	sudo bash -x -c ' \
+	$(SUDO) bash -x -c ' \
 		truncate images/$(_IMAGE_DATED) -s 7G \
 		&& device=`losetup --find --show images/$(_IMAGE_DATED)` \
 		&& $(MAKE) install CARD=$$device \
