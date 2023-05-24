@@ -4,7 +4,7 @@ ARCH ?= arm
 BOARD ?= rpi4
 PLATFORM ?= v2-hdmi
 SUFFIX ?=
-STAGES ?= __init__ os pikvm-repo watchdog ro no-audit pikvm __cleanup__
+STAGES ?= __init__ os pikvm-repo watchdog rootdelay ro no-audit pikvm __cleanup__
 
 HOSTNAME ?= pikvm
 SSLHOST ?=
