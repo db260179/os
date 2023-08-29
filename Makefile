@@ -4,7 +4,9 @@ ARCH ?= arm
 BOARD ?= rpi4
 PLATFORM ?= v2-hdmi
 SUFFIX ?=
-STAGES ?= __init__ os pikvm-repo watchdog rootdelay ro no-audit pikvm __cleanup__
+export BOARD ?= rpi4
+export PROJECT ?= pikvm-os.$(PLATFORM)$(SUFFIX)
+export STAGES ?= __init__ os pikvm-repo watchdog rootdelay ro no-audit pikvm __cleanup__
 
 HOSTNAME ?= pikvm
 SSLHOST ?=
@@ -29,7 +31,7 @@ MONITEMAILFROM ?=
 MONITMAILSERVER ?=
 MONITMAILPORT ?=
 
-CARD ?= /dev/mmcblk0
+export CARD ?= /dev/mmcblk0
 
 DEPLOY_USER ?= root
 
@@ -66,8 +68,8 @@ shell: $(_BUILDER_DIR)
 
 
 os: $(_BUILDER_DIR)
-	rm -rf $(_BUILDER_DIR)/stages/{pikvm,pikvm-otg-console}
-	cp -a pikvm pikvm-otg-console $(_BUILDER_DIR)/stages
+	rm -rf $(_BUILDER_DIR)/stages/arch/{pikvm,pikvm-otg-console}
+	cp -a pikvm pikvm-otg-console $(_BUILDER_DIR)/stages/arch
 	cp -a disk-$(if $(findstring v2,$(PLATFORM))$(findstring v3,$(PLATFORM))$(findstring v4,$(PLATFORM)),v2,v0).conf $(_BUILDER_DIR)/disk.conf
 	$(MAKE) -C $(_BUILDER_DIR) os \
 		NC=$(NC) \
@@ -111,7 +113,7 @@ update: $(_BUILDER_DIR)
 
 
 install: $(_BUILDER_DIR)
-	$(MAKE) -C $(_BUILDER_DIR) install CARD=$(CARD)
+	$(MAKE) -C $(_BUILDER_DIR) install
 
 
 scan: $(_BUILDER_DIR)
