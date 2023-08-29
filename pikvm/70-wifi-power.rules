@@ -1,1 +1,0 @@
-SUBSYSTEM=="net", ACTION=="add", DRIVERS=="brcmfmac", KERNEL=="wlan0", RUN="/usr/bin/iwconfig wlan0 power off" 
