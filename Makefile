@@ -13,7 +13,6 @@ HOSTNAME ?= pikvm
 SSLHOST ?=
 LOCALE ?= en_GB
 TIMEZONE ?= Europe/London
-#REPO_URL ?= http://mirror.yandex.ru/archlinux-arm
 REPO_URL ?= http://de3.mirror.archlinuxarm.org
 BUILD_OPTS ?=
 
