@@ -1,13 +1,10 @@
 # CHANGE this template config.mk to what pi you have and your settings!
 # rpi3 for Raspberry Pi 3; rpi2 for the version 2, zerow for ZeroW
 
-# Default architecture
-ARCH = arm
-
-BOARD = zero2w
+BOARD = rpi4
 
 # Hardware configuration
-PLATFORM = v2-hdmi
+PLATFORM = v3-hdmi
 
 # Target hostname
 HOSTNAME = pikvm

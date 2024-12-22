@@ -1,6 +1,6 @@
 -include config.mk
 
-PLATFORM ?= v2-hdmi
+PLATFORM ?= v3-hdmi
 SUFFIX ?=
 export BOARD ?= rpi4
 export PROJECT ?= pikvm-os.$(PLATFORM)$(SUFFIX)
