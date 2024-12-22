@@ -1,7 +1,5 @@
 -include config.mk
 
-ARCH ?= arm
-BOARD ?= rpi4
 PLATFORM ?= v2-hdmi
 SUFFIX ?=
 export BOARD ?= rpi4
@@ -9,11 +7,11 @@ export PROJECT ?= pikvm-os.$(PLATFORM)$(SUFFIX)
 export STAGES ?= __init__ os pikvm-repo pistat watchdog rootdelay ro pikvm restore-mirrorlist __cleanup__
 export NC ?=
 
-HOSTNAME ?= pikvm
-SSLHOST ?=
-LOCALE ?= en_GB
-TIMEZONE ?= Europe/London
-REPO_URL ?= http://de3.mirror.archlinuxarm.org
+export HOSTNAME ?= pikvm
+export SSLHOST ?=
+export LOCALE ?= en_GB
+export TIMEZONE ?= Europe/London
+export ARCH_DIST_REPO_URL ?= http://de3.mirror.archlinuxarm.org
 BUILD_OPTS ?=
 
 WIFI_HIDE_ESSID ?=
@@ -31,7 +29,9 @@ MONITEMAILFROM ?=
 MONITMAILSERVER ?=
 MONITMAILPORT ?=
 
-export CARD ?= /dev/mmcblk0
+export DISK ?= $(shell pwd)/disk/$(word 1,$(subst -, ,$(PLATFORM))).conf
+export CARD ?= /dev/null
+export IMAGE_XZ ?=
 
 DEPLOY_USER ?= root
 
@@ -73,9 +73,6 @@ os: $(_BUILDER_DIR)
 	$(MAKE) -C $(_BUILDER_DIR) os \
 		BUILD_OPTS=' $(BUILD_OPTS) \
 			--build-arg PLATFORM=$(PLATFORM) \
-			--build-arg USTREAMER_VERSION=$(call fetch_version,ustreamer) \
-			--build-arg KVMD_VERSION=$(call fetch_version,kvmd) \
-			--build-arg KVMD_WEBTERM_VERSION=$(call fetch_version,kvmd-webterm) \
 			--build-arg WIFI_HIDE_ESSID=$(WIFI_HIDE_ESSID) \
 			--build-arg WIFI_ESSID=$(WIFI_ESSID) \
 			--build-arg WIFI_PASSWD=$(WIFI_PASSWD) \
@@ -90,18 +87,10 @@ os: $(_BUILDER_DIR)
 			--build-arg MONITEMAILFROM=$(MONITEMAILFROM) \
 			--build-arg MONITMAILSERVER=$(MONITMAILSERVER) \
 			--build-arg MONITMAILPORT=$(MONITMAILPORT) \
-		' \
-		PROJECT=pikvm-os-$(PLATFORM) \
-		ARCH=$(ARCH) \
-		BOARD=$(BOARD) \
-		STAGES='$(STAGES)' \
-		HOSTNAME=$(HOSTNAME) \
-		LOCALE=$(LOCALE) \
-		TIMEZONE=$(TIMEZONE) \
-		REPO_URL=$(REPO_URL)
-
+		'
 
 $(_BUILDER_DIR):
+	mkdir -p `dirname $(_BUILDER_DIR)`
 	git clone --depth=1 https://github.com/db260179/pi-builder.git $(_BUILDER_DIR)
 
 
@@ -137,19 +126,6 @@ clean-all:
 	rm -rf $(_BUILDER_DIR)
 	- rmdir `dirname $(_BUILDER_DIR)`
 
-_IMAGE_DATED := $(PLATFORM)-$(BOARD)-$(HOSTNAME)-$(shell date +%Y%m%d).img
-_IMAGE_LATEST := $(PLATFORM)-$(BOARD)-$(HOSTNAME)-latest.img
-image:
-	which xz
-	mkdir -p images
-	$(SUDO) bash -x -c ' \
-		truncate images/$(_IMAGE_DATED) -s 7G \
-		&& device=`losetup --find --show images/$(_IMAGE_DATED)` \
-		&& $(MAKE) install CARD=$$device \
-		&& losetup -d $$device \
-	'
 
-	gzip images/$(_IMAGE_DATED)
-	sha1sum images/$(_IMAGE_DATED).gz | awk '{print $$1}' > images/$(_IMAGE_DATED).gz.sha1
-	cd images && ln -sf $(_IMAGE_DATED).gz $(_IMAGE_LATEST).gz
-	cd images && ln -sf $(_IMAGE_DATED).gz.sha1 $(_IMAGE_LATEST).gz.sha1
+upload:
+	rsync -rl --progress images/ $(DEPLOY_USER)@files.pikvm.org:/var/www/files.pikvm.org/images
