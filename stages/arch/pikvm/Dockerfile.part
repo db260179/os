@@ -13,33 +13,32 @@ ENV FAN=$FAN
 RUN echo $PLATFORM $VERSIONS
 
 RUN pacman --noconfirm --ask=4 -Syu \
-	&& case "$ARCH" in \
-		arm) \
-			case "$BOARD" in \
-				rpi2|rpi3|rpi4|zero2w) yes | pacman --needed -S pikvm-os-raspberrypi;; \
-			esac;; \
-		aarch64) true;; \
-		*) echo "Unknown architecture: $ARCH"; exit 1;; \
-	esac \
+    && pacman --noconfirm --ask=4 -S pikvm-os-raspberrypi \
 	&& (mv /boot/config.txt.pacsave /boot/config.txt || true) \
 	&& (mv /boot/cmdline.txt.pacsave /boot/cmdline.txt || true) \
 	&& rm -rf /var/cache/pacman/pkg/* /boot/*.pacnew
 
 RUN pkg-install --assume-installed tessdata \
-	kvmd-platform-$PLATFORM-$BOARD \
-	kvmd-webterm \
-	kvmd-oled \
-	kvmd-fan \
-	tesseract \
-	tesseract-data-eng \
-	wiringpi \
-	pastebinit \
-	tmate \
-	netctl \
-	monit \
-	parted \
-	e2fsprogs \
-	dos2unix
+		kvmd-platform-$PLATFORM-$BOARD \
+		kvmd-webterm \
+		kvmd-oled \
+		kvmd-fan \
+		tesseract \
+		tesseract-data-eng \
+		wiringpi \
+		pastebinit \
+		tmate \
+		vi-vim-symlink \
+		nano-syntax-highlighting \
+		avahi \
+		hostapd \
+		edid-decode \
+		monit \
+		netctl \
+		parted \
+		e2fsprogs \
+		dos2unix \
+		&& if [[ $PLATFORM =~ ^v4.*$ ]]; then pkg-install flashrom-pikvm; fi
 
 ENV PART_OPTS=nodev,nosuid,noexec,ro,errors=remount-ro
 RUN echo "LABEL=PIPST  /var/lib/kvmd/pst  ext4  $PART_OPTS,X-kvmd.pst-user=kvmd-pst  0 2" >> /etc/fstab
@@ -125,6 +124,9 @@ ARG NEW_HTTPS_CERT
 ENV NEW_HTTPS_CERT=$NEW_HTTPS_CERT
 RUN echo $NEW_HTTPS_CERT \
 	&& kvmd-gencert --do-the-thing
+RUN rm -f /etc/ssh/ssh_host_*_key* /etc/kvmd/vnc/ssl/*
 
 ARG SSLHOST
 ENV SSLHOST=$SSLHOST
+
+RUN echo "FIRST_BOOT=1" > /boot/pikvm.txt

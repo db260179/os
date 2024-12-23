@@ -5,6 +5,9 @@ BOARD = rpi4
 
 # Hardware configuration
 PLATFORM = v3-hdmi
+SUFFIX = -box
+OLED = 1
+FAN = 1
 
 # Target hostname
 HOSTNAME = pikvm

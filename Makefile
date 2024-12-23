@@ -73,6 +73,9 @@ os: $(_BUILDER_DIR)
 	$(MAKE) -C $(_BUILDER_DIR) os \
 		BUILD_OPTS=' $(BUILD_OPTS) \
 			--build-arg PLATFORM=$(PLATFORM) \
+			--build-arg OLED=$(call optbool,$(OLED)) \
+			--build-arg VERSIONS=$(call fv,ustreamer)/$(call fv,kvmd)/$(call fv,kvmd-webterm)/$(call fv,kvmd-fan) \
+			--build-arg FAN=$(call optbool,$(FAN)) \
 			--build-arg WIFI_HIDE_ESSID=$(WIFI_HIDE_ESSID) \
 			--build-arg WIFI_ESSID=$(WIFI_ESSID) \
 			--build-arg WIFI_PASSWD=$(WIFI_PASSWD) \
