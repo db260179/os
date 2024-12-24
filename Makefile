@@ -71,7 +71,7 @@ os: $(_BUILDER_DIR)
 
 $(_BUILDER_DIR):
 	mkdir -p `dirname $(_BUILDER_DIR)`
-	git clone --depth=1 https://github.com/mdevaev/pi-builder $(_BUILDER_DIR)
+	git clone --depth=1 https://github.com/db260179/pi-builder -b stable-2024 $(_BUILDER_DIR)
 
 
 update: $(_BUILDER_DIR)
