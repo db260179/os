@@ -17,6 +17,11 @@ ROOT_PASSWD ?= root
 WEBUI_ADMIN_PASSWD ?= admin
 IPMI_ADMIN_PASSWD ?= admin
 
+MONITEMAIL ?=
+MONITEMAILFROM ?=
+MONITMAILSERVER ?=
+MONITMAILPORT ?=
+
 export DISK ?= $(shell pwd)/disk/$(word 1,$(subst -, ,$(PLATFORM))).conf
 export CARD ?= /dev/null
 export IMAGE_XZ ?=
@@ -66,6 +71,10 @@ os: $(_BUILDER_DIR)
 			--build-arg ROOT_PASSWD=$(ROOT_PASSWD) \
 			--build-arg WEBUI_ADMIN_PASSWD=$(WEBUI_ADMIN_PASSWD) \
 			--build-arg IPMI_ADMIN_PASSWD=$(IPMI_ADMIN_PASSWD) \
+			--build-arg MONITEMAIL=$(MONITEMAIL) \
+			--build-arg MONITEMAILFROM=$(MONITEMAILFROM) \
+			--build-arg MONITMAILSERVER=$(MONITMAILSERVER) \
+			--build-arg MONITMAILPORT=$(MONITMAILPORT) \
 		'
 
 
