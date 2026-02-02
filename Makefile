@@ -15,6 +15,7 @@ export ARCH_DIST_REPO_URL ?= http://de3.mirror.archlinuxarm.org
 BUILD_OPTS ?=
 
 ROOT_PASSWD ?= root
+ROOT_SSH_AUTH_KEYS ?=
 WEBUI_ADMIN_PASSWD ?= admin
 IPMI_ADMIN_PASSWD ?= admin
 
@@ -54,6 +55,7 @@ all:
 	@ echo "    make scan           # Find all RPi devices in the local network"
 	@ echo "    make clean          # Remove the generated rootfs"
 	@ echo "    make clean-all      # Remove the generated rootfs and pi-builder toolchain"
+	@ echo "    make update         # Update Pi-Builder git files"
 
 
 shell: $(_BUILDER_DIR)
@@ -70,6 +72,7 @@ os: $(_BUILDER_DIR)
 			--build-arg VERSIONS=$(call fv,ustreamer)/$(call fv,kvmd)/$(call fv,kvmd-webterm)/$(call fv,kvmd-fan) \
 			--build-arg FAN=$(call optbool,$(FAN)) \
 			--build-arg ROOT_PASSWD=$(ROOT_PASSWD) \
+			--build-arg ROOT_SSH_AUTH_KEYS=$(ROOT_SSH_AUTH_KEYS) \
 			--build-arg WEBUI_ADMIN_PASSWD=$(WEBUI_ADMIN_PASSWD) \
 			--build-arg IPMI_ADMIN_PASSWD=$(IPMI_ADMIN_PASSWD) \
 			--build-arg MONITEMAIL=$(MONITEMAIL) \
