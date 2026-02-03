@@ -13,7 +13,7 @@ FAN = 1
 HOSTNAME = pikvm
 
 # SSL cert dns name
-SSLHOST = pikvm.smart
+SSLHOST = pikvm.lan
 
 # Monit settings
 MONITEMAIL = myemail@gmail.com

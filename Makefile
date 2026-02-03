@@ -9,6 +9,7 @@ export STAGES ?= __init__ os pikvm-repo pistat watchdog rootdelay ro pikvm resto
 export NC ?=
 
 export HOSTNAME ?= pikvm
+export SSLHOST ?=
 export LOCALE ?= en_GB
 export TIMEZONE ?= Europe/London
 export ARCH_DIST_REPO_URL ?= http://de3.mirror.archlinuxarm.org
@@ -79,6 +80,7 @@ os: $(_BUILDER_DIR)
 			--build-arg MONITEMAILFROM=$(MONITEMAILFROM) \
 			--build-arg MONITMAILSERVER=$(MONITMAILSERVER) \
 			--build-arg MONITMAILPORT=$(MONITMAILPORT) \
+			--build-arg SSLHOST=$(SSLHOST) \
 		'
 
 

@@ -100,4 +100,9 @@ RUN sed -i "\$d" /etc/kvmd/ipmipasswd \
 
 RUN rm -f /etc/ssh/ssh_host_*_key* /etc/kvmd/nginx/ssl/* /etc/kvmd/vnc/ssl/*
 
+ARG SSLHOST
+ENV SSLHOST=$SSLHOST
+
+RUN sed -s -i 's:/C=RU/ST=Moscow/L=Moscow/O=Pi-KVM/OU=Pi-KVM/CN=localhost:/C=GB/ST=Somewhere/L=London/O=Pi-KVM/OU=Pi-KVM/CN='$SSLHOST':' /usr/bin/kvmd-gencert
+
 RUN echo "FIRST_BOOT=1" > /boot/pikvm.txt
