@@ -28,26 +28,26 @@ LOCALE = en_GB
 TIMEZONE = Europe/London
 
 # For SSH root user
-ROOT_PASSWD = root
+ROOT_PASSWD = $(shell echo -n 'root' | base64 -w0)
 
 # SSH Authorized_keys for root
 ROOT_SSH_AUTH_KEYS = $(shell base64 -w0 sshkeys)
 
 # Web UI credentials: user=admin, password=<this>
-WEBUI_ADMIN_PASSWD = admin
+WEBUI_ADMIN_PASSWD = $(shell echo -n 'admin' | base64 -w0)
 
 # IPMI credentials: user=admin, password=<this>
-IPMI_ADMIN_PASSWD = admin
+IPMI_ADMIN_PASSWD = $(shell echo -n 'admin' | base64 -w0)
 
 # SD card device
 CARD = /dev/mmcblk0
 
 # Set WIFI SSID
-WIFI_ESSID = "my-network"
+WIFI_ESSID = $(shell echo -n 'my-network' | base64 -w0)
 
 # Set WIFI SSID Password
 # Add '\' in front of your password, if it has special characters!
-WIFI_PASSWD = "P@$$word"
+WIFI_PASSWD = $(shell echo -n 'P@$$word' | base64 -w0)
 
 # Connect to Hidden SSID - yes or no
-WIFI_HIDE_ESSID = "no"
+WIFI_HIDE_ESSID = $(shell echo -n 'no' | base64 -w0)
